@@ -7,13 +7,13 @@ if (isset($_GET['type']) && $_GET['type'] != "0") {
     //type bands
     $type = $_GET['type'];
 
-    $sql = "SELECT * FROM bands WHERE GenreID = ?";
+    $sql = "SELECT * FROM bands WHERE GenreID = ? ORDER BY Score DESC";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i', $type);
     $stmt->execute();
     $result = $stmt->get_result();
 } else {
-    $sql = "SELECT * FROM bands";
+    $sql = "SELECT * FROM bands ORDER BY Score DESC";
     $result = $conn->query($sql);
     $num = $result->num_rows;
 }
@@ -81,7 +81,7 @@ $genres = array(
 
             <div class="col-4" style="display: flex; justify-content: center;">
                 <a href="show.php?band_id=<?= $row['BandID'] ?>&type=<?= $type ?>">
-                    <img class="zoom rcorner" src="<?= $row['ImageURL'] ?>" width="100%" height="100%">
+                    <img class="zoom rcorner" src="<?= $row['ImageURL'] ?>" width="100%" height="100%" style="object-fit: cover;">
                 </a>
             </div>
 

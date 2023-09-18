@@ -6,7 +6,7 @@ if (isset($_GET['band_id']) && isset($_GET['type'])) {
     $band_id = $_GET['band_id'];
     $type = $_GET['type'];
 
-    $sql = "SELECT * FROM bands WHERE BandID = ?";
+    $sql = "SELECT * FROM bands INNER JOIN bandgenres ON bands.GenreID = bandgenres.GenreID WHERE BandID = ?";
 
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i', $band_id);
@@ -58,7 +58,7 @@ if (isset($_GET['band_id']) && isset($_GET['vote'])) {
                 <div class="card" style="width: 75%; margin-top:20px">
                     <img class="card-img-top" src="<?= $row['ImageURL'] ?>" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title"><?= $row['BandName'] ?> - <?= $row['GenreID'] ?></h5>
+                        <h5 class="card-title"><?= $row['BandName'] ?> - <?= $row['GenreName'] ?></h5>
                         <p class="card-text"><?= $row['information'] ?></p>
                         <div style="display: flex; justify-content: end; align-items: center;">
                             <form action="show.php">
