@@ -15,7 +15,7 @@ if (isset($_GET['band_id']) && isset($_GET['type'])) {
 }
 
 $row = $result->fetch_assoc();
-$rescreen = "show.php?band_id=" . $band_id . "&type=" . $type;
+$rescreen = "show.php?band_id=<?= $band_id ?>&type=<?= $type ?>";
 
 if (isset($_GET['band_id']) && isset($_GET['vote'])) {
     $sql = "Update bands SET Score = Score + 1 WHERE BandID = ?";
