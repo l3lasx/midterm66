@@ -17,8 +17,6 @@ if (isset($_GET['type']) && $_GET['type'] != "0") {
     $result = $conn->query($sql);
     $num = $result->num_rows;
 }
-
-// สร้างรายการของประเภทวงดนตรี
 $genres = array(
     0 => "วงดนตรีทั้งหมด",
     1 => "ไทย",
@@ -26,12 +24,6 @@ $genres = array(
     3 => "สากล",
     4 => "ร็อคสากล   "
 );
-// // หาประเภทที่ผู้ใช้กำลังดูอยู่
-// if (isset($genres[$type])) {
-//     $selectedGenre = $genres[$type];
-// } else {
-//     $selectedGenre = "วงดนตรีทั้งหมด";
-// }
 ?>
 
 <!DOCTYPE html>
