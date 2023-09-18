@@ -15,7 +15,7 @@ if (isset($_GET['band_id']) && isset($_GET['type'])) {
 }
 
 $row = $result->fetch_assoc();
-$rescreen = "show.php?band_id=<?= $band_id ?>&type=<?= $type ?>";
+$rescreen = "show.php?band_id=" . $band_id . "&type=" . $type;
 
 if (isset($_GET['band_id']) && isset($_GET['vote'])) {
     $sql = "Update bands SET Score = Score + 1 WHERE BandID = ?";
@@ -66,7 +66,8 @@ if (isset($_GET['band_id']) && isset($_GET['vote'])) {
                                 <input type="hidden" name="type" value="<?= $type ?>">
                                 <input type="hidden" name="vote">
                                 <button type="submit" class="btn" onclick="return confirm('ยืนยันการโหวต <?= $row['BandName'] ?>')">
-                                    <i class="fa-solid fa-heart" style="color: red; font-size: 16pt;"></i>
+                                    <i class="fa-solid fa-heart" style="color: red; font-size: 16pt;">
+</i>
                                 </button>(<?= $row['Score'] ?>)
                             </form>
                         </div>
