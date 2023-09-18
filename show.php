@@ -1,6 +1,7 @@
 <?php
 include("dbconnect/dbconnect.php");
-if(isset($_GET['band_id']) && isset($_GET['type'])){
+
+if (isset($_GET['band_id']) && isset($_GET['type'])) {
 
     $band_id = $_GET['band_id'];
     $type = $_GET['type'];
@@ -11,8 +12,21 @@ if(isset($_GET['band_id']) && isset($_GET['type'])){
     $stmt->bind_param('i', $band_id);
     $stmt->execute();
     $result = $stmt->get_result();
-}else {
+} else {
     echo "ไม่พบข้อมูลวงดนตรีที่คุณเลือก";
+}
+
+$row = $result->fetch_assoc();
+$rescreen = "show.php?band_id=" . $band_id . "&type=" . $type;
+
+if(isset($_GET['band_id']) && isset($_GET['vote'])){
+    $sql = "Update bands SET Score = Score + 1 WHERE BandID = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $band_id);
+    $stmt->execute();
+
+    header("Location: $rescreen");
+    exit();
 }
 ?>
 
@@ -35,11 +49,6 @@ if(isset($_GET['band_id']) && isset($_GET['type'])){
             </div>
         </div>
     </div>
-
-    <?php
-    $row = $result->fetch_assoc();
-    ?>
-
     <div class="container" style="margin-top: 20px;">
         <div class="row">
             <div class="col-12" style="display: flex; justify-content: start;">
@@ -54,11 +63,12 @@ if(isset($_GET['band_id']) && isset($_GET['type'])){
                         <h5 class="card-title"><?= $row['BandName'] ?> - <?= $row['GenreID'] ?></h5>
                         <p class="card-text"><?= $row['information'] ?></p>
                         <div style="display: flex; justify-content: end; align-items: center;">
-                            <!--<form action="show.php">
-                                    <input type="hidden" name="id" value="7">
-                                    <input type="hidden" name="vote">
-                                    <button type="submit" class="btn" onclick="return confirm('ยืนยันการโหวต มีนตรา อินทิรา')"><i class="fa-solid fa-heart" style="color: red; font-size: 16pt;"></i></button>(14)
-                                </form> -->
+                            <form action="show.php">
+                                <input type="hidden" name="band_id" value="<?= $row['BandID'] ?>">
+                                <input type="hidden" name="vote">
+                                <input type="hidden" name="type" value="<?= $type ?>">
+                                <button type="submit" class="btn" onclick="return confirm('ยืนยันการโหวต <?= $row['BandName'] ?>')"><i class="fa-solid fa-heart" style="color: red; font-size: 16pt;"></i></button>(<?= $row['Score'] ?>)
+                            </form>
                         </div>
 
                     </div>
@@ -67,6 +77,7 @@ if(isset($_GET['band_id']) && isset($_GET['type'])){
         </div>
 
         <?php
+
         ?>
     </div>
 
