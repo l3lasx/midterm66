@@ -1,7 +1,7 @@
 <?php
 include("dbconnect/dbconnect.php");
 
-$type = "";
+$type = "0";
 
 if (isset($_GET['type']) && $_GET['type'] != "0") {
     //type bands
@@ -24,15 +24,14 @@ $genres = array(
     1 => "ไทย",
     2 => "ไทยลุกทุ่ง",
     3 => "สากล",
-    4 => "ร็อคสากล"
+    4 => "ร็อคสากล   "
 );
-
-// หาประเภทที่ผู้ใช้กำลังดูอยู่
-if (isset($genres[$type])) {
-    $selectedGenre = $genres[$type];
-} else {
-    $selectedGenre = "วงดนตรีทั้งหมด";
-}
+// // หาประเภทที่ผู้ใช้กำลังดูอยู่
+// if (isset($genres[$type])) {
+//     $selectedGenre = $genres[$type];
+// } else {
+//     $selectedGenre = "วงดนตรีทั้งหมด";
+// }
 ?>
 
 <!DOCTYPE html>
@@ -89,7 +88,7 @@ if (isset($genres[$type])) {
         ?>
 
             <div class="col-4" style="display: flex; justify-content: center;">
-                <a href="show.php?id=2">
+                <a href="show.php?band_id=<?= $row['BandID'] ?>&type=<?= $type ?>">
                     <img class="zoom rcorner" src="<?= $row['ImageURL'] ?>" width="100%" height="100%">
                 </a>
             </div>
