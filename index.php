@@ -15,14 +15,13 @@ if (isset($_GET['type']) && $_GET['type'] != "0") {
 } else {
     $sql = "SELECT * FROM bands ORDER BY Score DESC";
     $result = $conn->query($sql);
-    $num = $result->num_rows;
 }
 $genres = array(
     0 => "วงดนตรีทั้งหมด",
     1 => "ไทย",
     2 => "ไทยลุกทุ่ง",
     3 => "สากล",
-    4 => "ร็อคสากล   "
+    4 => "ร็อคสากล"
 );
 ?>
 
@@ -87,7 +86,7 @@ $genres = array(
 
         <?php
             $count++;
-            // cloded tag
+            // closed tag
             if ($count % 3 == 0) {
                 echo '</div>';
             }
