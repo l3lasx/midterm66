@@ -69,7 +69,7 @@ $genres = array(
         </div>
 
         <?php
-        $count = 0;
+        $count = 0; //count col
         while ($row = $result->fetch_assoc()) {
             // new row if count % 3 equal 0
             // open tag
