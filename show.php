@@ -66,8 +66,7 @@ if (isset($_GET['band_id']) && isset($_GET['vote'])) {
                                 <input type="hidden" name="type" value="<?= $type ?>">
                                 <input type="hidden" name="vote">
                                 <button type="submit" class="btn" onclick="return confirm('ยืนยันการโหวต <?= $row['BandName'] ?>')">
-                                    <i class="fa-solid fa-heart" style="color: red; font-size: 16pt;">
-</i>
+                                    <i class="fa-solid fa-heart" style="color: red; font-size: 16pt;"></i>
                                 </button>(<?= $row['Score'] ?>)
                             </form>
                         </div>
