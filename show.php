@@ -70,7 +70,6 @@ if (isset($_GET['band_id']) && isset($_GET['vote'])) {
                                 </button>(<?= $row['Score'] ?>)
                             </form>
                         </div>
-
                     </div>
                 </div>
             </div>

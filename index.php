@@ -16,13 +16,17 @@ if (isset($_GET['type']) && $_GET['type'] != "0") {
     $sql = "SELECT * FROM bands ORDER BY Score DESC";
     $result = $conn->query($sql);
 }
+
+$genreQuery = "SELECT * FROM bandgenres";
+$genreResult = $conn->query($genreQuery);
+
 $genres = array(
     0 => "วงดนตรีทั้งหมด",
-    1 => "ไทย",
-    2 => "ไทยลุกทุ่ง",
-    3 => "สากล",
-    4 => "ร็อคสากล"
 );
+
+while ($genreRow = $genreResult->fetch_assoc()) {
+    $genres[$genreRow['GenreID']] = $genreRow['GenreName'];
+}
 ?>
 
 <!DOCTYPE html>
